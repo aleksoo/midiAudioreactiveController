@@ -1,9 +1,9 @@
 #include "InputDevice.h"  
 	
-InputDevice::InputDevice(int pin, int threshold)
+InputDevice::InputDevice(int pin, int treshold)
 {
-	this->usedPin = pin;
-    this->threshold = threshold;
+	usedPin = pin;
+    treshold = treshold;
     updateValues();
 }
 	
@@ -15,7 +15,7 @@ InputDevice::~InputDevice()
 void InputDevice::updateValues()
 {
     getSensorValue();
-    this->absValue = abs(this->sensorValue - this->threshold);
+    absValue = abs(sensorValue - treshold);
 }
 
 int InputDevice::getSensorValue() 

@@ -1,6 +1,5 @@
 #ifndef ENCODERSDRIVER_H
 #define ENCODERSDRIVER_H
-#pragma once
 
 #include "MenuEncoder.h"
 #include "ValueEncoder.h"
@@ -15,9 +14,7 @@ class EncodersDriver
 	ValueEncoder *valueEncoder;
 
 	public:
-
 		EncodersDriver();
 		~EncodersDriver();
-
 };
 #endif

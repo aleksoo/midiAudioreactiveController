@@ -2,8 +2,8 @@
 	
 EncodersDriver::EncodersDriver()
 {
-	this->menuEncoder = new MenuEncoder();
-    this->valueEncoder = new ValueEncoder(this->menuEncoder->getCcList());
+	menuEncoder = new MenuEncoder();
+    valueEncoder = new ValueEncoder(menuEncoder->getCcList());
 }
 	
 EncodersDriver::~EncodersDriver()

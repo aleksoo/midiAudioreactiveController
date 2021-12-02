@@ -1,6 +1,5 @@
 #ifndef INPUTDEVICE_H
 #define INPUTDEVICE_H
-#pragma once
 
 #include <stdint.h>
 #include "Arduino.h"
@@ -10,19 +9,16 @@
 
 class InputDevice  
 {
-  	private:
-		uint8_t usedPin;
-		int threshold = 0;
-		int sensorValue = 0; // it will change during runtime
-		int absValue = 0; // it will change during runtime
-
 	public:
-
-		InputDevice(int pin, int threshold = 500); // TODO: make default threshold in config
+		InputDevice(int pin, int treshold = 500); // TODO: make default treshold in config
 		~InputDevice();
 		void updateValues();
 		int getSensorValue();
 
+	private:
+		uint8_t usedPin;
+		int treshold = 0;
+		int sensorValue = 0; // it will change during runtime
+		int absValue = 0; // it will change during runtime
 };
-
 #endif

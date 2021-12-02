@@ -2,8 +2,7 @@
 	
 MenuEncoder::MenuEncoder()
 {
-	this->init(MENU_ENCODER_SW_PIN, MENU_ENCODER_DT_PIN, MENU_ENCODER_CLK_PIN);
-	this->m_currentCC = this->m_CcList[0];
+	init(MENU_ENCODER_SW_PIN, MENU_ENCODER_DT_PIN, MENU_ENCODER_CLK_PIN);
 	// this->valueEncoder = new ValueEncoder(VALUE_ENCODER_SW_PIN, VALUE_ENCODER_DT_PIN, VALUE_ENCODER_CLK_PIN, this->m_CcList)
 }
 	
@@ -12,9 +11,10 @@ MenuEncoder::~MenuEncoder()
 	
 }
 
-void MenuEncoder::doAction()
+void MenuEncoder::doActionOnClick()
 {
-	this->m_currentMode = (this->m_currentMode + 1) % this->m_numberOfModes;
+	// Cycle through available changable parameters (CC, Input)
+	m_currentMode = (m_currentMode + 1) % m_numberOfModes;
 }
 
 void MenuEncoder::changeCC()
@@ -25,7 +25,7 @@ void MenuEncoder::changeCC()
 void MenuEncoder::changeInput()
 {
 	// TODO: handle both incrementation and decrementation
-	this->m_currentInput = (this->m_currentInput + 1) % NUMBER_OF_INPUT_DEVICES;
+	m_currentInput = (m_currentInput + 1) % NUMBER_OF_INPUT_DEVICES;
 }
 
 void MenuEncoder::changeDisplay()
@@ -35,5 +35,5 @@ void MenuEncoder::changeDisplay()
 
 int *MenuEncoder::getCcList()
 {
-	return this->m_CcList;
+	return m_ccList;
 }
