@@ -1,28 +1,42 @@
-#include "EncoderExtended.h"  
-	
-EncoderExtended::EncoderExtended()
-{
+#include "EncoderExtended.h"
 
+EncoderExtended::EncoderExtended(const EncoderExtended &rhs) : m_pinClk(rhs.m_pinClk),
+                                                               m_button(new Button(*m_button)),
+                                                               m_encoder(new Encoder(*m_encoder))
+{
 }
 
-void EncoderExtended::init(int pinSw, int pinDt, int pinClk)      
+EncoderExtended &EncoderExtended::operator=(const EncoderExtended &rhs)
 {
-    this->c_encoder = new Encoder(pinSw, pinDt);
-    this->c_button = new Button(pinClk);
-    this->m_pinClk = pinClk;
-	Serial.print("AA");
+    if (this != &rhs)
+    {
+      m_pinClk = rhs.m_pinClk;
+      m_button = new Button(*m_button);
+      m_encoder = new Encoder(*m_encoder);
+    }
+    return *this;
 }
-	
+
 EncoderExtended::~EncoderExtended()
 {
-	
+    delete m_button;
+    delete m_encoder;
+}
+
+void EncoderExtended::init(int pinSw, int pinDt, int pinClk)
+{
+    m_encoder = new Encoder(pinSw, pinDt);
+    m_button = new Button(pinClk);
+    m_pinClk = pinClk;
+
+	  Serial.print("AA");
 }
 
 int EncoderExtended::readButton()
 {
-    if(this->c_button->pressed() == Button::PRESSED)
+    if (m_button->pressed() == Button::PRESSED)
     {
-        this->doAction();
+        doAction();
     }
     return 0; // TODO: to be changed
 }

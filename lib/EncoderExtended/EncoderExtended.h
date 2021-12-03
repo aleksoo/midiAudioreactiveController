@@ -1,25 +1,25 @@
 #ifndef ENCODEREXTENDED_H
 #define ENCODEREXTENDED_H
-#pragma once
 
 #include <Encoder.h>
 #include <Button.h>
-	
+
 class EncoderExtended
 {
-	private:
+public:
+  EncoderExtended() = default;
+  EncoderExtended(const EncoderExtended &rhs);
+  EncoderExtended &operator=(const EncoderExtended &rhs);
+  virtual ~EncoderExtended();
 
-		int m_pinClk;
-		Button *c_button;
-		Encoder *c_encoder; 
+  void init(int pinSw, int pinDt, int pinClk);
+  int readButton();
 
-		virtual void doAction() = 0;
-	public:
-		
-		EncoderExtended();
-		void init(int pinSw, int pinDt, int pinClk);
-		~EncoderExtended();
-		int readButton();
+private:
+  virtual void doAction() = 0;
 
+  int m_pinClk;
+  Button *m_button;
+  Encoder *m_encoder;
 };
 #endif

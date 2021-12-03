@@ -1,25 +1,19 @@
-#include "InputDevice.h"  
-	
-InputDevice::InputDevice(int pin, int threshold)
+#include "InputDevice.h"
+
+InputDevice::InputDevice(int pin, int treshold) : m_usedPin(pin),
+                                                  m_treshold(treshold)
 {
-	this->usedPin = pin;
-    this->threshold = threshold;
     updateValues();
-}
-	
-InputDevice::~InputDevice()
-{
-	
 }
 
 void InputDevice::updateValues()
 {
     getSensorValue();
-    this->absValue = abs(this->sensorValue - this->threshold);
+    m_absValue = abs(m_sensorValue - m_treshold);
 }
 
-int InputDevice::getSensorValue() 
+int InputDevice::getSensorValue()
 {
-    this->sensorValue = analogRead(this->usedPin);
-    return this->sensorValue;
+    m_sensorValue = analogRead(m_usedPin);
+    return m_sensorValue;
 }

@@ -1,12 +1,6 @@
-#include "EncodersDriver.h"  
-	
-EncodersDriver::EncodersDriver()
+#include "EncodersDriver.h"
+
+EncodersDriver::EncodersDriver() : m_menuEncoder(),
+                                   m_valueEncoder(m_menuEncoder.getCcList())
 {
-	this->menuEncoder = new MenuEncoder();
-    this->valueEncoder = new ValueEncoder(this->menuEncoder->getCcList());
-}
-	
-EncodersDriver::~EncodersDriver()
-{
-	
 }
