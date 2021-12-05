@@ -10,11 +10,19 @@
 class EncodersDriver  
 {
 	private:
-	MenuEncoder *menuEncoder;
-	ValueEncoder *valueEncoder;
+		void checkMenuEncoder();
+    	void checkValueEncoder();
+
+		menuData menu;
+		valuesData values;
 
 	public:
+	
+		MenuEncoder *menuEncoder; // Temporary moved to public
+		ValueEncoder *valueEncoder; // Temporary moved to public
+		
 		EncodersDriver();
 		~EncodersDriver();
+		void checkEncodersAction();
 };
 #endif

@@ -3,10 +3,27 @@
 EncodersDriver::EncodersDriver()
 {
 	menuEncoder = new MenuEncoder();
-    valueEncoder = new ValueEncoder(menuEncoder->getCcList());
+    valueEncoder = new ValueEncoder(menuEncoder->getMenuDataList());
 }
 	
 EncodersDriver::~EncodersDriver()
 {
 	
+}
+
+void EncodersDriver::checkEncodersAction()
+{
+    checkMenuEncoder();
+    checkValueEncoder();
+}
+
+void EncodersDriver::checkMenuEncoder()
+{
+    menuEncoder->readButton();
+    menuEncoder->readRotary();
+}
+
+void EncodersDriver::checkValueEncoder()
+{
+    
 }

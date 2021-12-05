@@ -4,6 +4,8 @@
 #include "EncoderExtended.h"
 
 #include <config.h>
+#include <structures.h>
+
 	
 class MenuEncoder : public EncoderExtended 
 {
@@ -11,27 +13,30 @@ class MenuEncoder : public EncoderExtended
 		MenuEncoder();
 		~MenuEncoder();
 
-		void changeCC();
-		void changeInput();
-		void changeDisplay();
+		void readRotary();
 		int *getCcList();
-		int getCurrentInput(); // TODO: fill it up
+		int getCurrentInput(); // probably obsolete
+		menuData *getCurrentMenuData();	
+		menuData **getMenuDataList();
 
 	private:
 		void doActionOnClick();
 
-		// TODO: 
-		// - fill CcList correctly
-		// - make currentCC assigned dynamically, in constructor 
-		int m_ccList[2] = {120, 121}; // TODO: Add length member and handle correctly (iterating through them and returning current CC and later input)
-		// TODO: every CC should contain info about its status
-			
-		int m_currentInput = 0;	
-		int m_currentCC = m_ccList[0]; // again, garbage value  	
+		void changeCC(int rotation);
+		void changeInput(int rotation);
+		void changeDisplay();
 
-		int m_currentMode = 1;
-		int m_numberOfModes = 2;
-		// 0 - changing CC value
-		// 1 - changing input
+		int m_currentMode = 0; 
+
+		int m_ccList[NUMBER_OF_CCS] = {120, 121, 122, 123, 124, 125, 126, 127};; // TODO: const? move out to config
+		int m_currentCC = m_ccList[0]; // again, garbage value, probably obsolete
+		int m_currentCC_idx = 0;
+
+		int m_currentInput = 0; // probably obsolete
+					
+		menuData *p_menuDataList[NUMBER_OF_CCS];
+		menuData *p_currentCC;
+		// pointer that should be passed to Driver, so when you change
+		// it in here, updated version should be available in Driver (or valueencoder, not sure yet)
 };
 #endif

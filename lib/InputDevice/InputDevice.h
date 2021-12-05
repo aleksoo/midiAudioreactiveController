@@ -4,13 +4,15 @@
 #include <stdint.h>
 #include "Arduino.h"
 
+#include <config.h>
+
 // Class for handling input devices
 // and keeping track with them
 
 class InputDevice  
 {
 	public:
-		InputDevice(int pin, int treshold = 500); // TODO: make default treshold in config
+		InputDevice(int pin, int treshold = INPUT_TRESHOLD);
 		~InputDevice();
 		void updateValues();
 		int getSensorValue();
