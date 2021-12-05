@@ -2,7 +2,7 @@
 	
 ValueEncoder::ValueEncoder(int *ccList)
 {
-    init(VALUE_ENCODER_SW_PIN, VALUE_ENCODER_DT_PIN, VALUE_ENCODER_CLK_PIN);
+    init(VALUE_ENCODER_DT_PIN, VALUE_ENCODER_CLK_PIN, VALUE_ENCODER_SW_PIN);
     m_availableCcList = ccList;
     m_availableCcListLength = sizeof(m_availableCcList);
 
