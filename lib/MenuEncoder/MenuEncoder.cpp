@@ -21,7 +21,6 @@ MenuEncoder::~MenuEncoder()
 void MenuEncoder::readRotary()
 {
 	int rotation = readEncoderRotation();
-
 	if(rotation)
 	{
 		switch(m_currentMode)

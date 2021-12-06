@@ -29,6 +29,7 @@ int EncoderExtended::readButton()
     // tbh I don't know if I should continue
     // this approach with returning value 
     // because it works with current approach
+    // and I don't even use returned value
 }
 
 int EncoderExtended::readEncoderRotation()

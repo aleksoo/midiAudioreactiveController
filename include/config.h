@@ -14,7 +14,10 @@
 	
 // Adjust value accordingly of how many modules you are going to use
 #define NUMBER_OF_INPUT_DEVICES 4
+<<<<<<< HEAD
 #define INPUT_TRESHOLD 500
+=======
+>>>>>>> cd37c83954bb78ceb4d4b6213bee9ec41721b4e9
 
 // I made it this way, so if number of input devices does not
 // match declared number of pins, compilation should fail.
