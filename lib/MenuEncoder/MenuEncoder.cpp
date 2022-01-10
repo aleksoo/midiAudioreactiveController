@@ -1,16 +1,13 @@
 #include "MenuEncoder.h"  
 	
-MenuEncoder::MenuEncoder()
+MenuEncoder::MenuEncoder(ccData ccDataList[], ccData *currentCc)
 {
 	init(MENU_ENCODER_DT_PIN, MENU_ENCODER_CLK_PIN, MENU_ENCODER_SW_PIN);
-	
-	for(int i=0; i < NUMBER_OF_CCS; ++i)
-	{
-		p_menuDataList[i]->cc = &(m_ccList[i]);
-	}
-	
-	p_currentCC = p_menuDataList[0];
-	// this->valueEncoder = new ValueEncoder(VALUE_ENCODER_SW_PIN, VALUE_ENCODER_DT_PIN, VALUE_ENCODER_CLK_PIN, this->m_CcList)
+	p_ccDataList = ccDataList;
+
+	// p_currentCcData = currentCc;
+	p_currentCcData = p_ccDataList;
+	// 
 }
 	
 MenuEncoder::~MenuEncoder()
@@ -39,6 +36,9 @@ void MenuEncoder::doActionOnClick()
 {
 	// Cycle through available changable parameters (CC, Input)
 	m_currentMode = (m_currentMode + 1) % MENU_NUMBER_OF_MODES;
+	Serial.print("Current input: ");
+	Serial.println(p_currentCcData->inputNumber);
+	// update menu screen here
 }
 
 void MenuEncoder::changeCC(int rotation)
@@ -48,8 +48,11 @@ void MenuEncoder::changeCC(int rotation)
 		if(m_currentCC_idx + rotation < NUMBER_OF_CCS)
 		{
 			m_currentCC_idx += rotation;
-			m_currentCC = m_ccList[m_currentCC_idx]; // obsolote probably
-			p_currentCC = p_menuDataList[m_currentCC_idx];
+			p_currentCcData = &(p_ccDataList[m_currentCC_idx]);
+			Serial.print("Rotation changeCC +, current CC: ");
+			Serial.println(p_currentCcData->cc);
+			// m_currentCC = m_ccList[m_currentCC_idx]; // obsolote probably
+			// p_currentCC = p_menuDataList[m_currentCC_idx];
 		}
 	}
 	if(rotation < 0)
@@ -57,30 +60,45 @@ void MenuEncoder::changeCC(int rotation)
 		if(m_currentCC_idx + rotation >= 0)
 		{
 			m_currentCC_idx += rotation;
-			m_currentCC = m_ccList[m_currentCC_idx]; // obsolote probably
-			p_currentCC = p_menuDataList[m_currentCC_idx];
+			p_currentCcData = &(p_ccDataList[m_currentCC_idx]);
+			Serial.print("Rotation changeCC -, current CC: ");
+			Serial.println(p_currentCcData->cc);
+			// m_currentCC = m_ccList[m_currentCC_idx]; // obsolote probably
+			// p_currentCcData = p_menuDataList[m_currentCC_idx];
 		}
 	}
+
+	// update menu screen here
 }
 
 void MenuEncoder::changeInput(int rotation)
 {
 	if(rotation > 0)
 	{
-		if(m_currentInput + rotation < NUMBER_OF_INPUT_DEVICES)
+		if(p_currentCcData->inputNumber + rotation < NUMBER_OF_INPUT_DEVICES)
 		{
 			m_currentInput += rotation; // obsolote probably
-			p_currentCC->inputNumber += rotation;
+			p_currentCcData->inputNumber += rotation;
+			Serial.print("Rotation changeInput +, current input: ");
+			Serial.print(p_currentCcData->inputNumber);
+			Serial.print(", current CC: ");
+			Serial.println(p_currentCcData->cc);
 		}
 	}
 	if(rotation < 0)
 	{
-		if(m_currentInput + rotation >= 0)
+		if(p_currentCcData->inputNumber + rotation >= 0)
 		{
 			m_currentInput += rotation; // obsolote probably
-			p_currentCC->inputNumber += rotation;
+			p_currentCcData->inputNumber += rotation;
+			Serial.print("Rotation changeInput -, current input: ");
+			Serial.print(p_currentCcData->inputNumber);
+			Serial.print(", current CC: ");
+			Serial.println(p_currentCcData->cc);
 		}
 	}
+
+	// update menu screen here
 }
 
 void MenuEncoder::changeDisplay()
@@ -90,20 +108,20 @@ void MenuEncoder::changeDisplay()
 
 int *MenuEncoder::getCcList()
 {
-	return m_ccList;
+	// return m_ccList;
 }
 
 int MenuEncoder::getCurrentInput()
 {
-	return p_currentCC->inputNumber;
+	return p_currentCcData->inputNumber;
 }
 
-menuData *MenuEncoder::getCurrentMenuData()
+ccData *MenuEncoder::getCurrentMenuData()
 {
-	return p_currentCC;
+	return p_currentCcData;
 }
 
 menuData **MenuEncoder::getMenuDataList()
 {
-	return p_menuDataList;
+	// return p_menuDataList;
 }

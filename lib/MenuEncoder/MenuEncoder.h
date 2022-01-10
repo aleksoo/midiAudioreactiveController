@@ -2,6 +2,7 @@
 #define MENUENCODER_H
 
 #include "EncoderExtended.h"
+#include "InputDevice.h"
 
 #include <config.h>
 #include <structures.h>
@@ -10,13 +11,13 @@
 class MenuEncoder : public EncoderExtended 
 {
 	public:
-		MenuEncoder();
+		MenuEncoder(ccData ccDataList[], ccData *currentCc);
 		~MenuEncoder();
 
 		void readRotary();
 		int *getCcList();
 		int getCurrentInput(); // probably obsolete
-		menuData *getCurrentMenuData();	
+		ccData *getCurrentMenuData();	
 		menuData **getMenuDataList();
 
 	private:
@@ -27,15 +28,13 @@ class MenuEncoder : public EncoderExtended
 		void changeDisplay();
 
 		int m_currentMode = 0; 
-
-		int m_ccList[NUMBER_OF_CCS] = {120, 121, 122, 123, 124, 125, 126, 127};; // TODO: const? move out to config
-		int m_currentCC = m_ccList[0]; // again, garbage value, probably obsolete
 		int m_currentCC_idx = 0;
-
-		int m_currentInput = 0; // probably obsolete
+		int m_currentInput = 0; // obsolete
 					
-		menuData *p_menuDataList[NUMBER_OF_CCS];
-		menuData *p_currentCC;
+		menuData *p_menuDataList[NUMBER_OF_CCS]; // Collection of every field available for every CC
+
+		ccData *p_ccDataList;
+		ccData *p_currentCcData;		
 		// pointer that should be passed to Driver, so when you change
 		// it in here, updated version should be available in Driver (or valueencoder, not sure yet)
 };

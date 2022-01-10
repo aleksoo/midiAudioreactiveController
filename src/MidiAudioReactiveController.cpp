@@ -12,12 +12,6 @@ void setup()
 {
   Serial.begin(9600); // setup serial
 
-  // Set up classes for input devices
-  for(int index = 0; index < NUMBER_OF_INPUT_DEVICES; ++index) 
-  {
-    inputDevices[index] = new InputDevice(inputPins[index], 500);
-  }
-
   // Set up for encoders handling
   encodersDriver = new EncodersDriver();
   
@@ -25,4 +19,7 @@ void setup()
 
 void loop() {
   encodersDriver->checkEncodersAction();
+  // update screen
+  // read inputs
+  // send midi
 }

@@ -10,7 +10,7 @@
 class ValueEncoder : public EncoderExtended
 {
 	public:
-		ValueEncoder(menuData **ccList); // TODO: change argument to structure from MenuEncoder and assign Pos and Range properly
+		ValueEncoder(ccData *ccDataList); // TODO: change argument to structure from MenuEncoder and assign Pos and Range properly
 		~ValueEncoder();
 		void readRotary();
 
@@ -20,12 +20,18 @@ class ValueEncoder : public EncoderExtended
 		void doActionOnClick();
 		int getValue();
 
+		void setCurrentCcData(ccData *newValueData);
+
 
 	private:
 		
-		menuData **p_menuDataList;
-		int m_availableCcListLength;
-		valuesData *p_currentValuesData;
+		// menuData **p_menuDataList;
+		// int m_availableCcListLength;
+		// menuData *p_currentMenuData;
+		// valuesData *p_currentValuesData; // obsolete
+
+		ccData *p_ccDataList;
+		ccData *p_currentCcData;
 
 		int m_currentMode = 0;
 		int m_currentCC_idx = 0;

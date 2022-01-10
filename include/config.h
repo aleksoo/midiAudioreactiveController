@@ -6,6 +6,11 @@
 #include "Arduino.h"
 #include <stdint.h>
 
+#define MIN_MIDI 0
+#define MAX_MIDI 127
+#define MIN_RANGE 0
+#define MAX_RANGE 127
+
 // Input devices are meant to be KY-037 modules with a modification.
 // Instead of using built-in microphone, you should remove it and replace
 // it with any mono socket (RCA or jack socket).
@@ -14,10 +19,7 @@
 	
 // Adjust value accordingly of how many modules you are going to use
 #define NUMBER_OF_INPUT_DEVICES 4
-<<<<<<< HEAD
 #define INPUT_TRESHOLD 500
-=======
->>>>>>> cd37c83954bb78ceb4d4b6213bee9ec41721b4e9
 
 // I made it this way, so if number of input devices does not
 // match declared number of pins, compilation should fail.
